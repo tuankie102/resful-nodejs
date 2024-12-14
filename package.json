@@ -1,0 +1,23 @@
+{
+  "name": "resful-express",
+  "version": "1.0.0",
+  "description": "beginning of nodejs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuankie102/resful-nodejs.git"
+  },
+  "author": "Tuan Kiet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuankie102/resful-nodejs/issues"
+  },
+  "homepage": "https://github.com/tuankie102/resful-nodejs#readme",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
