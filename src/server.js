@@ -7,9 +7,10 @@ const port = process.env.PORT || 8888
 const hostname = process.env.HOSTNAME
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello World! nodemon')
 })
 
 app.get('/test', (req, res) => {
