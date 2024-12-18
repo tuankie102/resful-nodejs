@@ -1,3 +1,5 @@
+const connection = require('../config/database')
+
 const getHomePage = (req, res) => {
     res.render('home.ejs')
 }
@@ -7,8 +9,15 @@ const getTestPage = (req, res) => {
 }
 
 const postCreateUser = (req, res) => {
-    console.log(">>> req.body: ", req.body)
-    res.send('create a new user')
+    let { email, name, city } = req.body
+
+    connection.query(
+        'INSERT INTO users (email, name, city) VALUES (?, ?, ?) ',
+        [email, name, city],
+        function (err, results) {
+            res.send('created a new user')
+        }
+    )
 }
 
 
