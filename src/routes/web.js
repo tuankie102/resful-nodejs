@@ -10,7 +10,7 @@ router.post('/create-user', postCreateUser)
 
 router.get('/create', getCreateUserPage)
 
-router.get('/update', getUpdateUserPage)
+router.get('/update/:id', getUpdateUserPage)
 
 module.exports = router
 
