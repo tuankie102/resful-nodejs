@@ -15,10 +15,6 @@ app.use(express.urlencoded({ extended: true })) // for form data
 configViewEngine(app)
 app.use('/', WebRoutes)
 
-connection.query('select * from Users u', function (error, results, fields) {
-    console.log('test data: ', results)
-});
-
 app.listen(port, hostname, () => {
     console.log(`Example app listening on port ${port}`)
 })
