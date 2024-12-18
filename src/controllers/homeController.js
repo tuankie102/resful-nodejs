@@ -23,5 +23,9 @@ const getCreateUserPage = (req, res) => {
     res.render('create.ejs')
 }
 
+const getUpdateUserPage = (req, res) => {
+    res.render('edit.ejs')
+}
 
-module.exports = { getHomePage, getTestPage, postCreateUser, getCreateUserPage }
+
+module.exports = { getHomePage, getTestPage, postCreateUser, getCreateUserPage, getUpdateUserPage }
