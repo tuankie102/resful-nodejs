@@ -3,8 +3,6 @@ require('dotenv').config()
 const configViewEngine = require('./config/viewEngine')
 const WebRoutes = require('./routes/web')
 const connection = require('./config/database')
-const Kitten = require('./models/Kitten')
-
 
 
 const app = express()
@@ -17,10 +15,6 @@ app.use(express.urlencoded({ extended: true })) // for form data
 
 configViewEngine(app)
 app.use('/', WebRoutes);
-
-const test = new Kitten({ name: 'test', age: 1 });
-test.save();
-
 
 (async () => {
     try {
