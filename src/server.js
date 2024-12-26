@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true })) // for form data
 configViewEngine(app)
 app.use('/', WebRoutes)
 
+connection()
+
 app.listen(port, hostname, () => {
     console.log(`Example app listening on port ${port}`)
 })
