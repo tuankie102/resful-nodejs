@@ -13,10 +13,15 @@ app.use(express.json()) // for json
 app.use(express.urlencoded({ extended: true })) // for form data
 
 configViewEngine(app)
-app.use('/', WebRoutes)
+app.use('/', WebRoutes);
 
-connection()
-
-app.listen(port, hostname, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+(async () => {
+    try {
+        await connection(); // Ensure the connection is awaited
+        app.listen(port, hostname, () => {
+            console.log(`Example app listening on port ${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to connect to the database:', error);
+    }
+})();
