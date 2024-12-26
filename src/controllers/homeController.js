@@ -4,7 +4,7 @@ const { getAllUsers, getUserById, updateUserById, deleteUserById } = require("..
 
 const getHomePage = async (req, res) => {
     // let users = await getAllUsers()
-    let users = await User.find({})
+    let users = await User.find({}).exec()
     res.render('home.ejs', { listUsers: users })
 }
 
@@ -20,7 +20,7 @@ const postCreateUser = async (req, res) => {
         email: email,
         name: name,
         city: city
-    })
+    }).exec()
 
     res.send('Create user successfully')
 }
@@ -43,18 +43,20 @@ const postUpdateUser = async (req, res) => {
         email: email,
         name: name,
         city: city
-    })
+    }).exec()
     res.redirect('/')
 }
 
 const getDeleteUserPage = async (req, res) => {
     const userId = req.params.id
-    let user = await getUserById(userId)
+    // let user = await getUserById(userId)
+    let user = await User.findById(userId)
     res.render('delete.ejs', { editUser: user })
 }
 
 const postDeleteUser = async (req, res) => {
-    deleteUserById(req.body.userId)
+    // deleteUserById(req.body.userId)
+    await User.deleteOne({ _id: req.body.userId }).exec()
     res.redirect('/')
 }
 
