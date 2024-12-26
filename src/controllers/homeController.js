@@ -4,7 +4,7 @@ const { getAllUsers, getUserById, updateUserById, deleteUserById } = require("..
 
 const getHomePage = async (req, res) => {
     // let users = await getAllUsers()
-    let users = []
+    let users = await User.find({})
     res.render('home.ejs', { listUsers: users })
 }
 
@@ -31,13 +31,19 @@ const getCreateUserPage = (req, res) => {
 
 const getUpdateUserPage = async (req, res) => {
     const userId = req.params.id
-    let user = await getUserById(userId)
+    // let user = await getUserById(userId)
+    let user = await User.findById(userId)
     res.render('edit.ejs', { editUser: user })
 }
 
 const postUpdateUser = async (req, res) => {
     let { userId, email, name, city } = req.body
-    updateUserById(userId, email, name, city)
+    // updateUserById(userId, email, name, city)
+    await User.updateOne({ _id: userId }, {
+        email: email,
+        name: name,
+        city: city
+    })
     res.redirect('/')
 }
 
