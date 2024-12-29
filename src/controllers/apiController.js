@@ -21,6 +21,21 @@ const createAUser = async (req, res) => {
     })
 }
 
+const updateAUser = async (req, res) => {
+    let { userId, email, name, city } = req.body
+    console.log('>>> check id:', userId)
+    let results = await User.updateOne({ _id: userId }, {
+        email: email,
+        name: name,
+        city: city
+    })
+    return res.status(200).json({
+        errorCode: 0,
+        data: results
+    })
+}
+
+
 module.exports = {
-    getAllUsers, createAUser
+    getAllUsers, createAUser, updateAUser
 }
