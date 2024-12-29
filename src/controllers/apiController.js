@@ -23,7 +23,6 @@ const createAUser = async (req, res) => {
 
 const updateAUser = async (req, res) => {
     let { userId, email, name, city } = req.body
-    console.log('>>> check id:', userId)
     let results = await User.updateOne({ _id: userId }, {
         email: email,
         name: name,
@@ -35,7 +34,15 @@ const updateAUser = async (req, res) => {
     })
 }
 
+const deleteAUser = async (req, res) => {
+    let userId = req.body.userId
+    let results = await User.deleteOne({ _id: userId })
+    return res.status(200).json({
+        errorCode: 0,
+        data: results
+    })
+}
 
 module.exports = {
-    getAllUsers, createAUser, updateAUser
+    getAllUsers, createAUser, updateAUser, deleteAUser
 }
