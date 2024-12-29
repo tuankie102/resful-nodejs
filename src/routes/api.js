@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllUsers } = require('../controllers/apiController')
+const { getAllUsers, createAUser } = require('../controllers/apiController')
 
 const RouterAPI = express.Router()
 
@@ -8,6 +8,8 @@ RouterAPI.get('/', (req, res) => {
 })
 
 RouterAPI.get('/users', getAllUsers)
+
+RouterAPI.post('/users', createAUser)
 
 
 module.exports = RouterAPI
