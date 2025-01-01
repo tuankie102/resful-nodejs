@@ -1,4 +1,4 @@
-const { createACustomerService, createManyCustomerService, findAllCustomersService } = require('../services/CustomerService')
+const { createACustomerService, createManyCustomerService, findAllCustomersService, updateACustomerService } = require('../services/CustomerService')
 const { UploadSingleFile } = require('../services/fileService')
 
 module.exports = {
@@ -60,5 +60,19 @@ module.exports = {
             })
         }
 
+    },
+    putUpdateACustomers: async (req, res) => {
+        let { id, name, address, email } = req.body
+        customerData = {
+            id,
+            name,
+            address,
+            email
+        }
+        let newCustomer = await updateACustomerService(customerData)
+        return res.status(200).json({
+            EC: 0,
+            data: newCustomer
+        })
     }
 }
