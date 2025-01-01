@@ -1,6 +1,6 @@
 const Customer = require('../models/Customer')
 
-const createACustomer = async (customerData) => {
+const createACustomerService = async (customerData) => {
     let customer = await Customer.create({
         name: customerData.name,
         address: customerData.address,
@@ -12,7 +12,7 @@ const createACustomer = async (customerData) => {
     return customer;
 }
 
-const createManyCustomer = async (customers) => {
+const createManyCustomerService = async (customers) => {
     console.log('>>>>>>>>>check customers: ', customers);
     try {
         let result = await Customer.insertMany(customers)
@@ -23,6 +23,17 @@ const createManyCustomer = async (customers) => {
     }
 }
 
+const findAllCustomersService = async () => {
+    try {
+        let customers = await Customer.find({})
+        return customers;
+    } catch (error) {
+        console.log('>>>>>>>>>check error find all customers: ', error);
+        return null
+    }
+
+}
+
 module.exports = {
-    createACustomer, createManyCustomer
+    createACustomerService, createManyCustomerService, findAllCustomersService
 }

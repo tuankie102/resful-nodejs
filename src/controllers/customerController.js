@@ -1,4 +1,4 @@
-const { createACustomer, createManyCustomer } = require('../services/CustomerService')
+const { createACustomerService, createManyCustomerService, findAllCustomersService } = require('../services/CustomerService')
 const { UploadSingleFile } = require('../services/fileService')
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
             description,
             image: imageUrl
         }
-        let newCustomer = await createACustomer(customerData)
+        let newCustomer = await createACustomerService(customerData)
         return res.status(200).json({
             EC: 0,
             data: newCustomer
@@ -30,7 +30,7 @@ module.exports = {
     },
     postCreateManyCustomer: async (req, res) => {
         let customers = req.body.customers
-        let newCustomers = await createManyCustomer(customers)
+        let newCustomers = await createManyCustomerService(customers)
         if (newCustomers) {
             return res.status(200).json({
                 EC: 0,
@@ -41,6 +41,22 @@ module.exports = {
             return res.status(200).json({
                 EC: -1,
                 data: newCustomers
+            })
+        }
+
+    },
+    getAllCustomers: async (req, res) => {
+        let customers = await findAllCustomersService()
+        if (customers) {
+            return res.status(200).json({
+                EC: 0,
+                data: customers
+            })
+        }
+        else {
+            return res.status(200).json({
+                EC: -1,
+                data: customers
             })
         }
 
