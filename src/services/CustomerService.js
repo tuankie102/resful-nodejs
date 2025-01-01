@@ -59,9 +59,19 @@ const deleteACustomerService = async (id) => {
         console.log('>>>>>>>>>check error delete a customer: ', error);
         return null
     }
+}
 
+const deleteManyCustomerService = async (idArr) => {
+    console.log('>>>>>>>>>check idArr: ', idArr);
+    try {
+        let result = await Customer.delete({ _id: { $in: idArr } })
+        return result
+    } catch (error) {
+        console.log('>>>>>>>>>check error delete many customers: ', error);
+        return null
+    }
 }
 
 module.exports = {
-    createACustomerService, createManyCustomerService, findAllCustomersService, updateACustomerService, deleteACustomerService
+    createACustomerService, createManyCustomerService, findAllCustomersService, updateACustomerService, deleteACustomerService, deleteManyCustomerService
 }
