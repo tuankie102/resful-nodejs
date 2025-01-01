@@ -1,6 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const configViewEngine = require('./config/viewEngine')
+const fileUpload = require('express-fileupload');
 const WebRoutes = require('./routes/web')
 const ApiRoutes = require('./routes/api')
 const connection = require('./config/database')
@@ -14,9 +15,13 @@ const hostname = process.env.HOSTNAME
 app.use(express.json()) // for json
 app.use(express.urlencoded({ extended: true })) // for form data
 
+// config express-fileupload
+app.use(fileUpload());
+
 configViewEngine(app)
 app.use('/', WebRoutes);
 app.use('/v1/api/', ApiRoutes);
+
 
 (async () => {
     try {

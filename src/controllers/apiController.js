@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const { UploadSingleFile } = require('../services/fileService')
 
 const getAllUsers = async (req, res) => {
     let results = await User.find({}).exec()
@@ -43,6 +44,20 @@ const deleteAUser = async (req, res) => {
     })
 }
 
+const postUploadSingleFile = async (req, res) => {
+    let sampleFile = req.files.image;
+
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let result = await UploadSingleFile(sampleFile)
+    console.log(">>> check result: ", result)
+
+    return res.send("ok single")
+}
+
 module.exports = {
-    getAllUsers, createAUser, updateAUser, deleteAUser
+    getAllUsers, createAUser, updateAUser, deleteAUser, postUploadSingleFile
 }

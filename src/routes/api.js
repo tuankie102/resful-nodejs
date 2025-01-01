@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllUsers, createAUser, updateAUser, deleteAUser } = require('../controllers/apiController')
+const { getAllUsers, createAUser, updateAUser, deleteAUser, postUploadSingleFile } = require('../controllers/apiController')
 
 const RouterAPI = express.Router()
 
@@ -14,6 +14,8 @@ RouterAPI.post('/users', createAUser)
 RouterAPI.put('/users', updateAUser)
 
 RouterAPI.delete('/users', deleteAUser)
+
+RouterAPI.post('/file', postUploadSingleFile)
 
 
 module.exports = RouterAPI
