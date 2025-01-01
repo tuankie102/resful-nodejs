@@ -23,10 +23,18 @@ const createManyCustomerService = async (customers) => {
     }
 }
 
-const findAllCustomersService = async () => {
+const findAllCustomersService = async (limit, page) => {
+    let result = null
     try {
-        let customers = await Customer.find({})
-        return customers;
+        if (limit && page) {
+            let offset = (page - 1) * limit
+            result = await Customer.find({}).limit(limit).skip(offset)
+            return result;
+        }
+        else {
+            result = await Customer.find({})
+            return result;
+        }
     } catch (error) {
         console.log('>>>>>>>>>check error find all customers: ', error);
         return null
