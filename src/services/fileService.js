@@ -12,14 +12,14 @@ const UploadSingleFile = async (fileObject) => {
         await fileObject.mv(finalPath);
         return {
             status: 'success',
-            data: finalPath,
+            data: finalName,
             error: null,
         }
     } catch (error) {
         console.log('>>>>>>>>>check error upload file: ', error);
         return {
             status: 'error',
-            data: finalPath,
+            data: finalName,
             error: error,
         }
     }

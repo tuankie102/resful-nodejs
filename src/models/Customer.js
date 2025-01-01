@@ -8,6 +8,6 @@ const customerSchema = new mongoose.Schema({
     image: String,
     description: String,
 }, { timestamps: true });
-const Customer = mongoose.model("user", customerSchema);
+const Customer = mongoose.model("customer", customerSchema);
 
 module.exports = Customer;
