@@ -1,4 +1,6 @@
-const { createACustomerService, createManyCustomerService, findAllCustomersService, updateACustomerService } = require('../services/CustomerService')
+const { createACustomerService, createManyCustomerService, findAllCustomersService,
+    updateACustomerService, deleteACustomerService }
+    = require('../services/CustomerService')
 const { UploadSingleFile } = require('../services/fileService')
 
 module.exports = {
@@ -73,6 +75,14 @@ module.exports = {
         return res.status(200).json({
             EC: 0,
             data: newCustomer
+        })
+    },
+    deleteACustomer: async (req, res) => {
+        let id = req.body.id
+        let result = await deleteACustomerService(id)
+        res.status(200).json({
+            EC: 0,
+            data: result
         })
     }
 }
