@@ -1,7 +1,6 @@
 const Customer = require('../models/Customer')
 
-const createAUser = async (customerData) => {
-    console.log('>>>>>>>>>check customerData: ', customerData);
+const createACustomer = async (customerData) => {
     let customer = await Customer.create({
         name: customerData.name,
         address: customerData.address,
@@ -13,6 +12,17 @@ const createAUser = async (customerData) => {
     return customer;
 }
 
+const createManyCustomer = async (customers) => {
+    console.log('>>>>>>>>>check customers: ', customers);
+    try {
+        let result = await Customer.insertMany(customers)
+        return result;
+    } catch (error) {
+        console.log('>>>>>>>>>check error insertMany: ', error);
+        return null
+    }
+}
+
 module.exports = {
-    createAUser
+    createACustomer, createManyCustomer
 }
