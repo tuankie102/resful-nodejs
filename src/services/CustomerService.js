@@ -23,11 +23,17 @@ const createManyCustomerService = async (customers) => {
     }
 }
 
-const findAllCustomersService = async (limit, page) => {
+const findAllCustomersService = async (limit, page, name) => {
     let result = null
     try {
         if (limit && page) {
             let offset = (page - 1) * limit
+            if (name) {
+                result = await Customer.find({
+                    "name": { $regex: '.*' + name + '.*' }
+                }).limit(limit).skip(offset)
+                return result
+            }
             result = await Customer.find({}).limit(limit).skip(offset)
             return result;
         }
