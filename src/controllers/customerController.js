@@ -51,10 +51,7 @@ module.exports = {
         let { limit, page, name } = req.query
         let customers = null
         if (limit && page) {
-            customers = await findAllCustomersService(limit, page)
-            if (name) {
-                customers = await findAllCustomersService(limit, page, name)
-            }
+            customers = await findAllCustomersService(limit, page, req.query)
         }
         else {
             customers = await findAllCustomersService()
