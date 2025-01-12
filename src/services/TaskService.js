@@ -34,15 +34,8 @@ const getAllTaskService = async (queryString) => {
 };
 
 const updateATaskService = async (taskData) => {
-    let { name, startDate, endDate, description, status } = taskData
     try {
-        let result = await Task.updateOne({ _id: taskData.id }, {
-            name,
-            startDate,
-            endDate,
-            description,
-            status
-        })
+        let result = await Task.updateOne({ _id: taskData.id }, { ...taskData }) /// ... means rest of the data and this one is a copy of data
         return result
     } catch (error) {
         console.log('>>>>>>>>>check error update a task: ', error);

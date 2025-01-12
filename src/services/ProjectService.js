@@ -46,6 +46,23 @@ const createAProjectService = async (data) => {
     return null;
   }
 
+  if (data.type === "ADD-TASKS") {
+    let newProject = await Project.findOne({ _id: data.projectId });
+    if (newProject) {
+      for (let i = 0; i < data.taskArr.length; i++) {
+        newProject.tasks.push(data.taskArr[i]);
+      }
+      try {
+        let result = await newProject.save();
+        return result;
+      } catch (error) {
+        console.log(">>> add taskArr -> error: ", error);
+        return null;
+      }
+    }
+    return null;
+  }
+
 };
 
 const getAllProjectService = async (queryString) => {
