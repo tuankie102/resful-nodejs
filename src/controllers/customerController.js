@@ -2,10 +2,31 @@ const { createACustomerService, createManyCustomerService, findAllCustomersServi
     updateACustomerService, deleteACustomerService, deleteManyCustomerService }
     = require('../services/CustomerService')
 const { UploadSingleFile } = require('../services/fileService')
+const Joi = require('joi');
 
 module.exports = {
     postCreateACustomer: async (req, res) => {
         let { name, address, phone, email, description } = req.body
+
+        const schema = Joi.object({
+            name: Joi.string()
+                .alphanum()
+                .min(3)
+                .max(30)
+                .required(),
+            address: Joi.string(),
+            phone: Joi.string().pattern(new RegExp('^[0-9]{8,11}$')),
+            email: Joi.string().email(),
+            description: Joi.string(),
+        })
+        const { error } = schema.validate(req.body);
+        if (error) {
+            return res.status(400).json({
+                EC: -1,
+                data: error.details[0].message
+            })
+        }
+
         let imageUrl = ""
         if (!req.files || Object.keys(req.files).length === 0) {
             //do nothing

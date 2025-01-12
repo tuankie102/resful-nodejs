@@ -4,8 +4,29 @@ const {
   deleteAProjectService,
   updateAProjectService,
 } = require("../services/ProjectService");
+const Joi = require('joi');
 
 const postCreateAProject = async (req, res) => {
+  let { name, startDate, endDate, type } = req.body
+
+  const schema = Joi.object({
+    name: Joi.string()
+      .min(3)
+      .max(30)
+      .required(),
+    startDate: Joi.date().min('now').required(),
+    endDate: Joi.date().min(Joi.ref('startDate')).required(),
+    type: Joi.required(),
+  })
+
+  const { error } = schema.validate({ name, startDate, endDate, type });
+  if (error) {
+    return res.status(400).json({
+      EC: -1,
+      data: error.details[0].message
+    })
+  }
+
   let result = await createAProjectService(req.body);
   return res.status(200).json({
     EC: 0,
