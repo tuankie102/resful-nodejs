@@ -26,7 +26,7 @@ app.use('/v1/api/', ApiRoutes);
 (async () => {
     try {
         await connection(); // Ensure the connection is awaited
-        app.listen(port, hostname, () => {
+        app.listen(port, () => {
             console.log(`Example app listening on port ${port}`);
         });
     } catch (error) {
